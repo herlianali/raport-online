@@ -180,13 +180,29 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Beranda</li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+            <li class="{{ Request::segment(1) == 'home' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('home') }}">
+                    <i class="fas fa-fire"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
             <li class="menu-header">Data Anggota</li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-user-graduate"></i> <span>Data Guru</span></a></li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-users"></i> <span>Data Siswa</span></a></li>
+
             <li class="menu-header">Kurikulum</li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-school"></i><span>Data Kelas</span></a></li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-book"></i><span>Data Mapel</span></a></li>
+            <li class="{{ Request::segment(1) == 'kelas' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('kelas.index') }}">
+                <i class="fas fa-school"></i>
+                <span>Data Kelas</span>
+                </a>
+            </li>
+            <li class="{{ Request::segment(1) == 'mapel' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('mapel.index') }}">
+                <i class="fas fa-book"></i>
+                <span>Data Mapel</span>
+                </a>
+            </li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-bowling-ball"></i><span>Data Ekstrakulikuler</span></a></li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-bookmark"></i><span>Data KD</span></a></li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-tablet"></i><span>Data Nilai</span></a></li>
