@@ -1,14 +1,14 @@
 @extends('layouts.home')
-@section('title', 'Mata Pelajaran')
+@section('title', 'Guru')
 
 @section('content')
 <div class="main-content">
     <section class="section">
     <div class="section-header">
-        <h1>Mata Pelajaran</h1>
+        <h1>Guru</h1>
         <div class="section-header-breadcrumb">
-            <a href="{{ route('mapel.create') }}" class="btn btn-primary"><i
-                class="fas fa-plus text-white-50"></i> Tambah Mata Pelajaran</a>
+            <a href="{{ route('guru.create') }}" class="btn btn-primary"><i
+                class="fas fa-plus text-white-50"></i> Tambah Data Guru</a>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h4>Data Mata Pelajaran</h4>
+            <h4>Data Guru</h4>
 
         </div>
         <div class="card-body p-0">
@@ -29,16 +29,35 @@
                 <table class="table-striped table-md table">
                     <tr>
                         <th>#</th>
-                        <th>Nama Mata Pelajaran</th>
+                        <th>Foto</th>
+                        <th>NIP</th>
+                        <th>Nama Guru</th>
+                        <th>Tempat, Tanggal Lahir</th>
+                        <th>Alamat</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Telepon</th>
+                        <th>Status Wali Murid</th>
+                        <th>Password</th>
                         <th>Aksi</th>
                     </tr>
-                    @forelse ($mapel as $m)
+                    @forelse ($guru as $g)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $m->nama_mapel }}</td>
+                            <td><img class="card-img-top" src="{{ Storage::url('public/gurus/'.$g->foto) }}" width="50px"></td>
+                            <td>{{ $g->nip }}</td>
+                            <td>{{ $g->nama }}</td>
+                            <td>{{ $g->tpt_lahir }},
+                            {{ $g->tgl_lahir }}</td>
+                            <td>{{ $g->alamat }}</td>
+                            <td>{{ $g->jenis_kelamin == 'P'?'Perempuan':'Laki-Laki' }}</td>
+                            <td>{{ $g->tlp }}</td>
+                            <td>{{ $g->status_wali == "1"?'Ya':'Tidak' }}</td>
+                            <td>{{ $g->password }}</td>
                             <td>
-                                <form method="POST" action="{{ route('mapel.destroy',
-                                ['mapel' => $m->id]) }}">
+                                <form method="POST" action="{{ route('guru.destroy',
+                                ['guru' => $g->id]) }}">
+                                <a href="{{ route('guru.edit',$g->id) }}" class="btn btn-warning">Edit</a>
+
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger ">Hapus</button>
@@ -46,7 +65,7 @@
                             </td>
                         </tr>
                     @empty
-                        <td colspan="3" class="text-center">Tidak ada data...</td>
+                        <td colspan="10" class="text-center">Tidak ada data...</td>
                     @endforelse
                 </table>
             </div>

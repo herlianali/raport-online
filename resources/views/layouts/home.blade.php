@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-<!-- CSS Libraries -->
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 <!-- Template CSS -->
 <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
@@ -187,7 +188,7 @@
                 </a>
             </li>
             <li class="menu-header">Data Anggota</li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-user-graduate"></i> <span>Data Guru</span></a></li>
+            <li class="{{ Request::segment(1) == 'guru' ? 'active' : '' }}"><a class="nav-link" href="{{ route('guru.index') }}"><i class="fas fa-user-graduate"></i> <span>Data Guru</span></a></li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-users"></i> <span>Data Siswa</span></a></li>
 
             <li class="menu-header">Kurikulum</li>
@@ -219,7 +220,7 @@
 
     <footer class="main-footer">
         <div class="footer-left">
-            Copyright &copy; Sitempe 2022
+            Copyright &copy; E-Sar 2022
         </div>
     </footer>
     </div>
@@ -240,5 +241,7 @@
 <script src="{{ asset('/js/custom.js') }}"></script>
 
 <!-- Page Specific JS File -->
+<script src="{{ asset('/js/page/auth-register.js') }}"></script>
+
 </body>
 </html>

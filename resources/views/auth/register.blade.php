@@ -167,7 +167,7 @@
                                 <input class="form-check-input" type="radio" name="jenis_kelamin" id="perempuan" value="P" {{ old('jenis_kelamin')=='P' ? 'checked': '' }}>
                                 <label for="perempuan" class="form-check-label">Perempuan</label>
                             </div>
-                            </div>
+                        </div>
                         @error('jenis_kelamin')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
