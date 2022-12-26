@@ -189,7 +189,7 @@
             </li>
             <li class="menu-header">Data Anggota</li>
             <li class="{{ Request::segment(1) == 'guru' ? 'active' : '' }}"><a class="nav-link" href="{{ route('guru.index') }}"><i class="fas fa-user-graduate"></i> <span>Data Guru</span></a></li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-users"></i> <span>Data Siswa</span></a></li>
+            <li class="{{ Request::segment(1) == 'siswa' ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa.index') }}"><i class="fas fa-users"></i> <span>Data Siswa</span></a></li>
 
             <li class="menu-header">Kurikulum</li>
             <li class="{{ Request::segment(1) == 'kelas' ? 'active' : '' }}">
