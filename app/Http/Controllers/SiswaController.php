@@ -41,7 +41,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nis' => ['required', 'string', 'max:16', 'unique:siswas'], 'nisn' => ['string', 'max:16', 'unique:siswas'],'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required', 'foto' => ['required','file', 'image', 'max:2000'], 'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'kelas' => 'required', 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nis' => ['required', 'string', 'max:16', 'unique:siswas'], 'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required', 'foto' => ['required','file', 'image', 'max:2000'], 'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'kelas' => 'required', 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $request->hasFile('foto');
