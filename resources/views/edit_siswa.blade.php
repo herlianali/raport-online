@@ -13,7 +13,7 @@
                 <h4>Edit Data Siswa</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('siswa.update',$siswa->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('siswa.update',$siswa->nis) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -131,9 +131,8 @@
                     <div class="form-group col-6">
                         <label class="form-label">Kelas</label>
                         <select class="form-control @error('kelas') is-invalid @enderror" id="kelas" name="kelas">
-                            <option value="{{ $siswa->kelas }}">{{ $siswa->kelas }}</option>
                             @foreach ($kelas as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                            <option value="{{ $k->id_kelas }}" {{ $k->id_kelas == $siswa->kelas_id ? 'selected' : '' }}>{{ $k->nama_kelas }}</option>
                             @endforeach
                         </select>
                         @error('kelas')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Mapeler;
 use App\Models\Mapel;
 use Illuminate\Http\Request;
 
@@ -41,6 +42,8 @@ class MapelController extends Controller
         ]);
 
         $post = new Mapel();
+        $mapel = Mapeler::IDGenerator(new Mapel, 'id_mapel', 3, 'MP'); /** Generate id */
+        $post->id_mapel = $mapel;
         $post->nama_mapel = $request->nama_mapel;
         $post->save();
 
@@ -87,10 +90,10 @@ class MapelController extends Controller
      * @param  \App\Models\Mapel  $mapel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_mapel)
     {
-        $post = Mapel::findOrFail($id);
-        $post->delete();
+
+        Mapel::where('id_mapel', $id_mapel)->delete();
         return redirect()->route('mapel.index')->with('status','Data Berhasil Dihapus');
     }
 }

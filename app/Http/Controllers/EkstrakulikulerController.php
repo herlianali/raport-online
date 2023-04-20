@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Kelaser;
-use App\Models\Kelas;
+use App\Models\Ekstrakulikuler;
 use Illuminate\Http\Request;
 
-class KelasController extends Controller
+class EkstrakulikulerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $data["kelas"] = Kelas::all();
-        return view('kelas', $data);
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        return view('tambah_kelas');
+        //
     }
 
     /**
@@ -37,26 +35,16 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_kelas' => 'required',
-        ]);
-
-        $post = new Kelas();
-        $kelas = Kelaser::IDGenerator(new Kelas, 'id_kelas', 3, 'KS'); /** Generate id */
-        $post->id_kelas = $kelas;
-        $post->nama_kelas = $request->nama_kelas;
-        $post->save();
-
-        return redirect()->route('kelas.index')->with('status', 'Data Telah di Simpan');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\Ekstrakulikuler  $ekstrakulikuler
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show(Ekstrakulikuler $ekstrakulikuler)
     {
         //
     }
@@ -64,10 +52,10 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\Ekstrakulikuler  $ekstrakulikuler
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelas $kelas)
+    public function edit(Ekstrakulikuler $ekstrakulikuler)
     {
         //
     }
@@ -76,10 +64,10 @@ class KelasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\Ekstrakulikuler  $ekstrakulikuler
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, Ekstrakulikuler $ekstrakulikuler)
     {
         //
     }
@@ -87,12 +75,11 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kelas  $kelas
+     * @param  \App\Models\Ekstrakulikuler  $ekstrakulikuler
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_kelas)
+    public function destroy(Ekstrakulikuler $ekstrakulikuler)
     {
-        Kelas::where('id_kelas', $id_kelas)->delete();
-        return redirect()->route('kelas.index')->with('status','Data Berhasil Dihapus');
+        //
     }
 }

@@ -28,3 +28,4 @@ Route::resource('kelas', KelasController::class)->middleware('auth');
 Route::resource('mapel', MapelController::class)->middleware('auth');
 Route::resource('guru', GuruController::class)->middleware('auth');
 Route::resource('siswa', SiswaController::class)->middleware('auth');
+

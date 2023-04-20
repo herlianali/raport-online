@@ -23,7 +23,6 @@
                     </div>
                     <div class="card-body">
                         {{ $guru }}
-                        {{-- {{ $guru; }} --}}
                     </div>
                 </div>
             </div>
@@ -40,7 +39,6 @@
                         <h4>Total Siswa</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ @count($siswa) }} --}}
                         {{ $siswa }}
                     </div>
                 </div>
@@ -58,7 +56,6 @@
                         <h4>Total Kelas</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ @count($kelas) }} --}}
                         {{ $kelas }}
                     </div>
                 </div>
@@ -76,7 +73,6 @@
                         <h4>Total Mata Pelajaran</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ @count($mapel) }} --}}
                         {{ $mapel }}
                     </div>
                 </div>

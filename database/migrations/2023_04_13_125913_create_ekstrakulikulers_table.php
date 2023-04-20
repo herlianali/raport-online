@@ -13,20 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('siswas', function (Blueprint $table) {
-            $table->string('nis',20)->unique()->primary();
-            $table->string('nisn',20)->nullable()->unique();
-            $table->string('nama',150);
-            $table->date('tgl_lahir');
-            $table->string('tpt_lahir',30);
-            $table->string('alamat');
-            $table->string('foto');
-            $table->char('jenis_kelamin',1);
-            $table->string('tlp',20);
+        Schema::create('ekstrakulikulers', function (Blueprint $table) {
+            $table->string('id_ekstra',20)->primary();
+            $table->string('nis_id',20)->unique();
             $table->string('kelas_id',20)->unique();
-            $table->string('password',100);
+            $table->string('nm_ekstra',50);
+            $table->string('smtr',20);
+            $table->string('nilai_ekstra',10);
             $table->timestamps();
 
+            $table->foreign('nis_id')->references('nis')->on('siswas')->onDelete('cascade');
             $table->foreign('kelas_id')->references('id_kelas')->on('kelas')->onDelete('cascade');
         });
     }
@@ -38,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siswas');
+        Schema::dropIfExists('ekstrakulikulers');
     }
 };

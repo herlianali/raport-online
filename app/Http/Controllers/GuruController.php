@@ -92,9 +92,10 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit($guru)
     {
-        return view('edit_guru',compact('guru'));
+        $data = Guru::where('nip', $guru)->first();
+        return view('edit_guru')->with('guru', $data);
     }
 
     /**
@@ -108,42 +109,31 @@ class GuruController extends Controller
     {
 
         $request->validate([
-            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],'foto' => 'required','file', 'image', 'max:2000',
         ]);
+        $slug = Str::slug($request['nama']);
 
-        $post = Guru::find($id);
+        // ambil extensi file asli
+        $extFile = $request->foto->getClientOriginalExtension();
 
-        if ($request->hasFile('foto')) {
-            $request->validate([
-                'foto' => 'required','file', 'image', 'max:2000',
-            ]);
+        // Generate nama gambar, gabungan dari slug "nama" + time()+extensi
+        $namaFile = $slug.'-'.time().".".$extFile;
 
-            // gunakan slug helper agar "nama" bisa di pakai sebagai dari nama foto
-            $slug = Str::slug($request['nama']);
+        // proses upload, simpan ke dalam folder "upload"
+        $request->file('foto')->storeAs('public/gurus',$namaFile);
 
-            // ambil extensi file asli
-            $extFile = $request->foto->getClientOriginalExtension();
-
-            // Generate nama gambar, gabungan dari slug "nama" + time()+extensi
-            $namaFile = $slug.'-'.time().".".$extFile;
-
-            // proses upload, simpan ke dalam folder "upload"
-            $request->file('foto')->storeAs('public/gurus',$namaFile);
-            // $path = $request->file('foto')->store('public/uploads');
-
-            $post->foto = $namaFile;
-
-        }
-
-        $post->nama = $request->nama;
-        $post->tgl_lahir = $request->tgl_lahir;
-        $post->tpt_lahir = $request->tpt_lahir;
-        $post->alamat = $request->alamat;
-        $post->jenis_kelamin = $request->jenis_kelamin;
-        $post->tlp = $request->tlp;
-        $post->status_wali = $request->status_wali;
-        $post->password = $request->password;
-        $post->save();
+        $data = [
+            'nama' => $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+            'tpt_lahir' => $request->tpt_lahir,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tlp' => $request->tlp,
+            'status_wali' => $request->status_wali,
+            'password' => $request->password,
+            'foto' => $namaFile,
+        ];
+        Guru::where('nip',$id)->update($data);
 
         return redirect()->route('guru.index')->with('status', 'Data Telah di Ubah');
     }
@@ -154,12 +144,12 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy($guru)
     {
-        $avatar = Guru::findOrFail($guru->id);
 
+        $avatar = Guru::where('nip', $guru)->first();
         if(Storage::delete('public/gurus/'.$avatar->foto)) {
-            $avatar->delete();
+            Guru::where('nip', $guru)->delete();
         }
 
         return redirect()->route('guru.index')

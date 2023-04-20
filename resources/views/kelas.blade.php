@@ -38,7 +38,7 @@
                             <td>{{ $k->nama_kelas }}</td>
                             <td>
                                 <form method="POST" action="{{ route('kelas.destroy',
-                                ['kela' => $k->id]) }}">
+                                ['kela' => $k->id_kelas]) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger ">Hapus</button>

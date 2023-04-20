@@ -13,7 +13,7 @@
                 <h4>Edit Data Guru</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('guru.update',$guru->id) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('guru.update',$guru->nip) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

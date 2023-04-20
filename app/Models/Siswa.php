@@ -9,11 +9,11 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "nis","nama","tpt_lahir","tgl_lahir", "alamat","foto","jenis_kelamin","tlp","kelas","password"
+        'nis','nama','tpt_lahir','tgl_lahir', 'alamat','foto','jenis_kelamin','tlp','kelas','password'
     ];
 
-    // public function kelas()
-    // {
-    //     return $this->hasOne(Kelas::class);
-    // }
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id_kelas');
+    }
 }

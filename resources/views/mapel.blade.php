@@ -38,7 +38,7 @@
                             <td>{{ $m->nama_mapel }}</td>
                             <td>
                                 <form method="POST" action="{{ route('mapel.destroy',
-                                ['mapel' => $m->id]) }}">
+                                ['mapel' => $m->id_mapel]) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger ">Hapus</button>

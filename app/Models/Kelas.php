@@ -10,7 +10,7 @@ class Kelas extends Model
     use HasFactory;
     public $table = "kelas";
     protected $fillable = [
-        "nama_kelas",
+        'id_kelas','nama_kelas',
     ];
 
     public function siswas()

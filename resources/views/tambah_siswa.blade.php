@@ -129,7 +129,7 @@
                         <select class="form-control @error('kelas') is-invalid @enderror" id="kelas" name="kelas">
                             <option value="" readonly>Pilih Kelas</option>
                             @foreach ($kelas as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
                             @endforeach
                         </select>
                         @error('kelas')

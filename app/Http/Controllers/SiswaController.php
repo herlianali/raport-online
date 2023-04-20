@@ -69,7 +69,7 @@ class SiswaController extends Controller
         $post->foto = $namaFile;
         $post->jenis_kelamin = $request->jenis_kelamin;
         $post->tlp = $request->tlp;
-        $post->kelas = $request->kelas;
+        $post->kelas_id = $request->kelas;
         $post->password = $request->password;
         $post->save();
 
@@ -93,9 +93,10 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Siswa $siswa)
+    public function edit($siswa)
     {
         $kelas = Kelas::all();
+        $siswa = Siswa::where('nis', $siswa)->first();
         return view('edit_siswa',compact('siswa','kelas'));
     }
 
@@ -109,43 +110,36 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'kelas' => 'required', 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'kelas' => 'required', 'password' => ['required', 'string', 'min:8', 'confirmed'], 'foto' => 'required','file', 'image', 'max:2000',
         ]);
 
-        $post = Siswa::find($id);
+        // gunakan slug helper agar "nama" bisa di pakai sebagai dari nama foto
+        $slug = Str::slug($request['nama']);
 
-        if ($request->hasFile('foto')) {
-            $request->validate([
-                'foto' => 'required','file', 'image', 'max:2000',
-            ]);
+        // ambil extensi file asli
+        $extFile = $request->foto->getClientOriginalExtension();
 
-            // gunakan slug helper agar "nama" bisa di pakai sebagai dari nama foto
-            $slug = Str::slug($request['nama']);
+        // Generate nama gambar, gabungan dari slug "nama" + time()+extensi
+        $namaFile = $slug.'-'.time().".".$extFile;
 
-            // ambil extensi file asli
-            $extFile = $request->foto->getClientOriginalExtension();
+        // proses upload, simpan ke dalam folder "upload"
+        $request->file('foto')->storeAs('public/siswas',$namaFile);
+        // $path = $request->file('foto')->store('public/uploads');
 
-            // Generate nama gambar, gabungan dari slug "nama" + time()+extensi
-            $namaFile = $slug.'-'.time().".".$extFile;
+        $data = [
+            'nisn' => $request->nisn,
+            'nama' => $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+            'tpt_lahir' => $request->tpt_lahir,
+            'alamat' => $request->alamat,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tlp' => $request->tlp,
+            'kelas_id' => $request->kelas,
+            'password' => $request->password,
+            'foto' => $namaFile,
+        ];
 
-            // proses upload, simpan ke dalam folder "upload"
-            $request->file('foto')->storeAs('public/siswas',$namaFile);
-            // $path = $request->file('foto')->store('public/uploads');
-
-            $post->foto = $namaFile;
-
-        }
-
-        $post->nisn = $request->nisn;
-        $post->nama = $request->nama;
-        $post->tgl_lahir = $request->tgl_lahir;
-        $post->tpt_lahir = $request->tpt_lahir;
-        $post->alamat = $request->alamat;
-        $post->jenis_kelamin = $request->jenis_kelamin;
-        $post->tlp = $request->tlp;
-        $post->kelas = $request->kelas;
-        $post->password = $request->password;
-        $post->save();
+        Siswa::where('nis',$id)->update($data);
 
         return redirect()->route('siswa.index')->with('status', 'Data Telah di Ubah');
     }
@@ -156,12 +150,12 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Siswa $siswa)
+    public function destroy($siswa)
     {
-        $avatar = Siswa::findOrFail($siswa->id);
 
+        $avatar = Siswa::where('nis', $siswa)->first();
         if(Storage::delete('public/siswas/'.$avatar->foto)) {
-            $avatar->delete();
+            Siswa::where('nis', $siswa)->delete();
         }
 
         return redirect()->route('siswa.index')

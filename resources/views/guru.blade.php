@@ -55,8 +55,8 @@
                             <td>{{ $g->password }}</td>
                             <td>
                                 <form method="POST" action="{{ route('guru.destroy',
-                                ['guru' => $g->id]) }}">
-                                <a href="{{ route('guru.edit',$g->id) }}" class="btn btn-warning">Edit</a>
+                                ['guru' => $g->nip]) }}">
+                                <a href="{{ route('guru.edit',$g->nip) }}" class="btn btn-warning">Edit</a>
 
                                 @method('DELETE')
                                 @csrf

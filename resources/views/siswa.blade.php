@@ -53,12 +53,12 @@
                             <td>{{ $s->alamat }}</td>
                             <td>{{ $s->jenis_kelamin == 'P'?'Perempuan':'Laki-Laki' }}</td>
                             <td>{{ $s->tlp }}</td>
-                            <td>{{ $s->kelas }}</td>
+                            <td>{{ $s->kelas->nama_kelas }}</td>
                             <td>{{ $s->password }}</td>
                             <td>
                                 <form method="POST" action="{{ route('siswa.destroy',
-                                ['siswa' => $s->id]) }}">
-                                <a href="{{ route('siswa.edit',$s->id) }}" class="btn btn-warning">Edit</a>
+                                ['siswa' => $s->nis]) }}">
+                                <a href="{{ route('siswa.edit',$s->nis) }}" class="btn btn-warning">Edit</a>
 
                                 @method('DELETE')
                                 @csrf
