@@ -1,14 +1,14 @@
 @extends('layouts.home')
-@section('title', 'Kelas')
+@section('title', 'Ekstrakulikuler')
 
 @section('content')
 <div class="main-content">
     <section class="section">
     <div class="section-header">
-        <h1>Kelas</h1>
+        <h1>Data Ekstrakulikuler</h1>
         <div class="section-header-breadcrumb">
-            <a href="{{ route('kelas.create') }}" class="btn btn-primary"><i
-                class="fas fa-plus text-white-50"></i> Tambah Kelas</a>
+            <a href="{{ route('eks.create') }}" class="btn btn-primary"><i
+                class="fas fa-plus text-white-50"></i> Tambah Nama Ekstrakulikuler</a>
         </div>
     </div>
 
@@ -21,24 +21,25 @@
 
     <div class="card">
         <div class="card-header">
-            <h4>Data Kelas</h4>
+            <h4>Data Ekstrakulikuler</h4>
 
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table-striped table-md table">
                     <tr>
-                        <th>Kode Kelas</th>
-                        <th>Nama Kelas</th>
+                        <th>Kode Ekstrakulikuler</th>
+                        <th>Nama Ekstrakulikuler</th>
                         <th>Aksi</th>
                     </tr>
-                    @forelse ($kelas as $k)
+                    @forelse ($eks as $e)
                         <tr>
-                            <td>{{$k->id_kelas}}</td>
-                            <td>{{ $k->nama_kelas }}</td>
+                            {{-- <td>{{$loop->iteration}}</td> --}}
+                            <td>{{$e->id_eks}}</td>
+                            <td>{{ $e->nama_ekstra }}</td>
                             <td>
-                                <form method="POST" action="{{ route('kelas.destroy',
-                                ['kela' => $k->id_kelas]) }}">
+                                <form method="POST" action="{{ route('eks.destroy',
+                                ['ek' => $e->id_eks]) }}">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger ">Hapus</button>

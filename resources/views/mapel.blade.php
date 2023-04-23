@@ -28,13 +28,14 @@
             <div class="table-responsive">
                 <table class="table-striped table-md table">
                     <tr>
-                        <th>#</th>
+                        <th>Kode Mapel</th>
                         <th>Nama Mata Pelajaran</th>
                         <th>Aksi</th>
                     </tr>
                     @forelse ($mapel as $m)
                         <tr>
-                            <td>{{$loop->iteration}}</td>
+                            {{-- <td>{{$loop->iteration}}</td> --}}
+                            <td>{{$m->id_mapel}}</td>
                             <td>{{ $m->nama_mapel }}</td>
                             <td>
                                 <form method="POST" action="{{ route('mapel.destroy',

@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('id_ekstra',20)->primary();
             $table->string('nis_id',20)->unique();
             $table->string('kelas_id',20)->unique();
-            $table->string('nm_ekstra',50);
+            $table->string('eks_id',20)->unique();
             $table->string('smtr',20);
             $table->string('nilai_ekstra',10);
             $table->timestamps();
 
             $table->foreign('nis_id')->references('nis')->on('siswas')->onDelete('cascade');
             $table->foreign('kelas_id')->references('id_kelas')->on('kelas')->onDelete('cascade');
+            $table->foreign('eks_id')->references('id_eks')->on('ekstras')->onDelete('cascade');
         });
     }
 

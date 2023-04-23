@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -27,7 +28,8 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('tambah_guru');
+        $mapel = Mapel::all();
+        return view('tambah_guru', compact('mapel'));
     }
 
     /**
@@ -40,7 +42,7 @@ class GuruController extends Controller
     {
 
         $request->validate([
-            'nip' => ['required', 'string', 'max:16', 'unique:gurus'],        'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required', 'foto' => ['required','file', 'image', 'max:2000'], 'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nip' => ['required', 'string', 'max:16', 'unique:gurus'],        'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required', 'foto' => ['required','file', 'image', 'max:2000'], 'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'mapel' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $request->hasFile('foto');
@@ -67,6 +69,7 @@ class GuruController extends Controller
         $post->foto = $namaFile;
         $post->jenis_kelamin = $request->jenis_kelamin;
         $post->tlp = $request->tlp;
+        $post->mapel_id = $request->mapel;
         $post->status_wali = $request->status_wali;
         $post->password = $request->password;
         $post->save();
@@ -94,8 +97,9 @@ class GuruController extends Controller
      */
     public function edit($guru)
     {
-        $data = Guru::where('nip', $guru)->first();
-        return view('edit_guru')->with('guru', $data);
+        $mapel = Mapel::all();
+        $guru = Guru::where('nip', $guru)->first();
+        return view('edit_guru',compact('mapel', 'guru'));
     }
 
     /**
@@ -109,7 +113,7 @@ class GuruController extends Controller
     {
 
         $request->validate([
-            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],'foto' => 'required','file', 'image', 'max:2000',
+            'nama' => 'required','tgl_lahir' => 'required', 'tpt_lahir' => 'required', 'alamat' => 'required',  'jenis_kelamin' => ['required','in:P,L'], 'tlp' => 'required', 'mapel' => 'required', 'status_wali' => ['required','in:1,0'], 'password' => ['required', 'string', 'min:8', 'confirmed'],'foto' => 'required','file', 'image', 'max:2000',
         ]);
         $slug = Str::slug($request['nama']);
 
@@ -129,6 +133,7 @@ class GuruController extends Controller
             'alamat' => $request->alamat,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tlp' => $request->tlp,
+            'mapel_id' => $request->mapel,
             'status_wali' => $request->status_wali,
             'password' => $request->password,
             'foto' => $namaFile,

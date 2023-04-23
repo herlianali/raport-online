@@ -84,7 +84,7 @@
                         <img src="{{ Storage::url('public/gurus/'.$guru->foto) }}" height="200" width="200" alt="gambar"/>
                         </div>
                         <label for="foto">Foto</label>
-                            <input type="file" id="foto" name="foto" accept="image/*"
+                            <input type="file" id="foto" name="foto" value="{{ $guru->foto }}"  accept="image/*"
                             class="form-control @error('foto') is-invalid @enderror">
                             @error('foto')
                             <span class="invalid-feedback" role="alert">
@@ -108,7 +108,20 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="form-label">Mata Pelajaran</label>
+                        <select class="form-control @error('mapel') is-invalid @enderror" id="mapel" name="mapel">
+                            @foreach ($mapel as $m)
+                            <option value="{{ $m->id_mapel }}" {{ $m->id_mapel == $guru->mapel_id ? 'selected' : '' }}>{{ $m->nama_mapel }}</option>
+                            @endforeach
+                        </select>
+                        @error('mapel')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="row">

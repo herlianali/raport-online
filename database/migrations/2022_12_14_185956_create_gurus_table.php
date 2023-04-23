@@ -22,9 +22,12 @@ return new class extends Migration
             $table->string('foto');
             $table->char('jenis_kelamin',1);
             $table->string('tlp',20);
+            $table->string('mapel_id',20)->unique();
             $table->char('status_wali',1);
             $table->string('password',100);
             $table->timestamps();
+
+            $table->foreign('mapel_id')->references('id_mapel')->on('mapels')->onDelete('cascade');
         });
     }
 

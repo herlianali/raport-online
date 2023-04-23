@@ -18,7 +18,7 @@
 
                 <div class="row">
                     <div class="form-group col-6">
-                        <label for="nip">No Induk Pengajar</label>
+                        <label for="nip">No Induk Pengajar(NIP)</label>
                         <input id="nip" type="text" class="form-control @error('nip')
                             is-invalid
                         @enderror" name="nip" value="{{ old('nip') ?? $guru->nip ?? ''}}" autocomplete="nip" autofocus>
@@ -132,6 +132,21 @@
                             </div>
                         </div>
                         @error('status_wali')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="form-label">Mata Pelajaran</label>
+                        <select class="form-control @error('mapel') is-invalid @enderror" id="mapel" name="mapel">
+                            <option value="" readonly>Pilih Mata Pelajaran</option>
+                            @foreach ($mapel as $m)
+                                <option value="{{ $m->id_mapel }}">{{ $m->nama_mapel }}</option>
+                            @endforeach
+                        </select>
+                        @error('mapel')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>

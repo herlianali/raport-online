@@ -32,6 +32,7 @@
                         <th>Foto</th>
                         <th>NIP</th>
                         <th>Nama Guru</th>
+                        <th>Mata Pelajaran</th>
                         <th>Tempat, Tanggal Lahir</th>
                         <th>Alamat</th>
                         <th>Jenis Kelamin</th>
@@ -46,6 +47,7 @@
                             <td><img class="card-img-top" src="{{ Storage::url('public/gurus/'.$g->foto) }}" width="50px"></td>
                             <td>{{ $g->nip }}</td>
                             <td>{{ $g->nama }}</td>
+                            <td>{{ $g->mapel->nama_mapel }}</td>
                             <td>{{ $g->tpt_lahir }},
                             {{ $g->tgl_lahir }}</td>
                             <td>{{ $g->alamat }}</td>
