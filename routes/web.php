@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EkstraController;
+use App\Http\Controllers\EkstrakulikulerController;
 use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
@@ -28,6 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('kelas', KelasController::class)->middleware('auth');
 Route::resource('mapel', MapelController::class)->middleware('auth');
 Route::resource('eks', EkstraController::class)->middleware('auth');
+Route::resource('ekstrakulikuler', EkstrakulikulerController::class)->middleware('auth');
 Route::resource('guru', GuruController::class)->middleware('auth');
 Route::resource('siswa', SiswaController::class)->middleware('auth');
 

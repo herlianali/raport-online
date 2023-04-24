@@ -210,7 +210,12 @@
                     <span>Data Ekstrakulikuler</span>
                 </a>
             </li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-bowling-ball"></i><span>Nilai Ekstrakulikuler</span></a></li>
+            <li class="{{ Request::segment(1) == 'ekstrakulikuler' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('ekstrakulikuler.index') }}">
+                    <i class="fas fa-bowling-ball"></i>
+                    <span>Nilai Ekstrakulikuler</span>
+                </a>
+            </li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-bookmark"></i><span>Nilai KD</span></a></li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-tablet"></i><span>Data Nilai</span></a></li>
             <li class="menu-header">Administrator</li>
