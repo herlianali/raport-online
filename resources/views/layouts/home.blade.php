@@ -216,7 +216,12 @@
                     <span>Nilai Ekstrakulikuler</span>
                 </a>
             </li>
-            <li><a class="nav-link" href="credits.html"><i class="fas fa-bookmark"></i><span>Nilai KD</span></a></li>
+            <li class="{{ Request::segment(1) == 'kd' ? 'active' : '' }}"">
+                <a class="nav-link" href="{{ route('kd.index') }}">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Nilai KD</span>
+                </a>
+            </li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-tablet"></i><span>Data Nilai</span></a></li>
             <li class="menu-header">Administrator</li>
             <li><a class="nav-link" href="credits.html"><i class="fas fa-wrench"></i><span>Rules Sistem</span></a></li>

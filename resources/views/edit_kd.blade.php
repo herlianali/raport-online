@@ -1,19 +1,19 @@
 @extends('layouts.home')
-@section('title', 'Edit Nilai Ekstrakulikuler')
+@section('title', 'Edit Nilai KD')
 
 @section('content')
 <div class="main-content">
     <section class="section">
     <div class="section-header">
-        <h1>Ekstrakulikuler</h1>
+        <h1>Nilai KD</h1>
     </div>
 
     <div class="card">
             <div class="card-header">
-                <h4>Edit Nilai Ekstrakulikuler</h4>
+                <h4>Edit Nilai KD</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('ekstrakulikuler.update',$ekstra->id_ekstra) }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('kd.update',$kd->id_kd) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -61,10 +61,10 @@
 
                 <div class="row">
                     <div class="form-group col-2">
-                        <label for="nilai">Nilai Ekstrakulikuler</label>
+                        <label for="nilai">Nilai KD</label>
                         <input id="nilai" type="text" class="form-control @error('nilai')
                             is-invalid
-                        @enderror" name="nilai" value="{{ $ekstra->nilai_ekstra }}" autocomplete="nilai">
+                        @enderror" name="nilai" value="{{ $kd->nilai_kd }}" autocomplete="nilai">
                         @error('nilai')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
-                    Simpan Data
+                    Edit Data
                     </button>
                 </div>
                 </form>
