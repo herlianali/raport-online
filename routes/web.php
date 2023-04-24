@@ -7,6 +7,7 @@ use App\Http\Controllers\KdController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaController;
 
 /*
@@ -32,6 +33,7 @@ Route::resource('mapel', MapelController::class)->middleware('auth');
 Route::resource('eks', EkstraController::class)->middleware('auth');
 Route::resource('ekstrakulikuler', EkstrakulikulerController::class)->middleware('auth');
 Route::resource('kd', KdController::class)->middleware('auth');
+Route::resource('nilai', NilaiController::class)->middleware('auth');
 Route::resource('guru', GuruController::class)->middleware('auth');
 Route::resource('siswa', SiswaController::class)->middleware('auth');
 

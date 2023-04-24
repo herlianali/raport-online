@@ -9,7 +9,7 @@ class Ekstrakulikuler extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_ekstra','nis_id','eks_id','smtr','nilai_ekstra',
+        'id_ekstra','nis_id','kelas_id','eks_id','smtr','nilai_ekstra',
     ];
 
     public function siswa()

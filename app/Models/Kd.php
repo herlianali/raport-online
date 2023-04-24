@@ -9,7 +9,7 @@ class Kd extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_kd','nis_id','eks_id','smtr','nilai_kd',
+        'id_kd','nis_id','kelas_id','eks_id','smtr','nilai_kd',
     ];
 
     public function siswa()
